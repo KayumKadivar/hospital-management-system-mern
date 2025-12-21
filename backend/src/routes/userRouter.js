@@ -1,27 +1,16 @@
 const express = require("express");
+const {
+  checkPhone,
+  verifyOtp,
+  setPassword,
+  login,
+} = require("../controllers/authController");
+
 const router = express.Router();
 
-const { sendOTPNewUser, verifyOTPNewUser } = require("../controllers/authController");
-const { 
-  sendOtpValidator, 
-  verifyOtpValidator, 
-  validateHandler 
-} = require("../middleware/validators");
-
-// Route 1: Send OTP
-router.post(
-  "/patient/send-otp", 
-  sendOtpValidator, // <-- Checks formatting
-  validateHandler,  // <-- Throws error if format wrong
-  sendOTPNewUser
-);
-
-// Route 2: Verify OTP (Login/Register)
-router.post(
-  "/patient/verify-otp", 
-  verifyOtpValidator, 
-  validateHandler, 
-  verifyOTPNewUser
-);
+router.post("/register/check-phone", checkPhone);
+router.post("/register/verify-otp", verifyOtp);
+router.post("/register/set-password", setPassword);
+router.post("/login", login);
 
 module.exports = router;
