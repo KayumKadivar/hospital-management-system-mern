@@ -58,10 +58,6 @@ const userSchema = new mongoose.Schema(
       ],
       default: "Patient",
     },
-    isProfileComplete: {
-      type: Boolean,
-      default: false,
-    },
   },
   { timestamps: true }
 );
