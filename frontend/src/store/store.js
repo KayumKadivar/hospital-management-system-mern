@@ -1,18 +1,14 @@
-import { configureStore, createSlice } from "@reduxjs/toolkit";
-
-// Placeholder slice - replace with actual slices as needed
-const appSlice = createSlice({
-    name: 'app',
-    initialState: {
-        initialized: true
-    },
-    reducers: {}
-});
+import { configureStore } from "@reduxjs/toolkit";
+import dashboardAuthReducer from "./auth/dashboardAuthSlice";
+import { apiSlice } from "./services/apiSlice";
 
 const store = configureStore({
-    reducer: {
-        app: appSlice.reducer
-    }
+  reducer: {
+    dashboardAuth: dashboardAuthReducer,
+    [apiSlice.reducerPath]: apiSlice.reducer
+  },
+  middleware: (getDefaultMiddleware) =>
+    getDefaultMiddleware().concat(apiSlice.middleware),
 })
 
 export default store
